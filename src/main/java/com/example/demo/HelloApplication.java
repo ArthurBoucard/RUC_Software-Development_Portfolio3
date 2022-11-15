@@ -17,7 +17,8 @@ public class HelloApplication extends Application {
         stage.setScene(scene);
         stage.show();
 
-        databaseCommands.getAvailableVessel();
+        DatabaseQueries.getAllPortName();
+        DatabaseQueries.getAvailableVessel("Jawaharlal Nehru", "Mombasa", 500);
     }
 
     public static void main(String[] args) {
