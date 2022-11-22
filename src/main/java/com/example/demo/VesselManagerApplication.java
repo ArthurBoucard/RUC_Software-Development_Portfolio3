@@ -42,7 +42,8 @@ public class VesselManagerApplication extends Application {
 
         Button srch = new Button("Search");
         srch.setOnAction(e -> {
-                AvailableVesselList.clear(); // clear doesn't work
+                AvailableVesselList.clear();
+                combo3.getItems().clear();
                 int cargo = 0;
                 if (fld.getText().matches("^[0-9]*$+"))
                     cargo = Integer.parseInt(fld.getText());
@@ -65,7 +66,7 @@ public class VesselManagerApplication extends Application {
                 "-fx-font: 22 arial; -fx-base: rgb(16,156,3); " +
                 "-fx-text-fill: rgb(255,255,255);");
 
-        Button vldt = new Button("Validate");
+        Button vldt = new Button("Send");
         vldt.setOnAction(e -> {
                 int cargo = 0;
                 if (fld.getText().matches("^[0-9]*$"))

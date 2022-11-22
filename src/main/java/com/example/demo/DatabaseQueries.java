@@ -70,15 +70,14 @@ class DatabaseQueries {
         return VesselList;
     }
 
-    public static boolean addContainerToVessel(String vesselName, int newCargo) throws SQLException { // need to add to existing not set to cargo
+    public static boolean addContainerToVessel(String vesselName, int newCargo) throws SQLException {
         if (conn == null)
             open();
 
         Statement stmt = null;
         stmt = conn.createStatement();
-        String query = "update flow set containers = " + newCargo + " where exists (select containers cont, transport, vessel.name vesselname, vessel.capacity vesselcapacity from flow f inner join transport on f.transport = transport.id inner join vessel on transport.vessel = vessel.id where vessel.name = '" + vesselName + "' and flow.containers = cont);";
-        ResultSet rs = stmt.executeQuery(query);
-        System.out.println(rs.getStatement());
+        String query = "update flow set containers = containers + " + newCargo + " where exists (select containers cont, transport, vessel.name vesselname, vessel.capacity vesselcapacity from flow f inner join transport on f.transport = transport.id inner join vessel on transport.vessel = vessel.id where vessel.name = '" + vesselName + "' and flow.containers = cont);";
+        stmt.execute(query);
         stmt.close();
         return true;
     }
